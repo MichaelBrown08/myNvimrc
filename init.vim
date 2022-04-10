@@ -1,5 +1,3 @@
-""" Optixal's Neovim Init.vim
-
 """ Vim-Plug
 call plug#begin()
 
@@ -22,6 +20,7 @@ Plug 'rhysd/vim-color-spring-night'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
 Plug 'preservim/nerdtree'
@@ -33,23 +32,23 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'mhinz/vim-signify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-abolish'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'wellle/context.vim'
+Plug 'kdheepak/lazygit.nvim'
 call plug#end()
 
 """ Main Configurations
 filetype plugin indent on
+set number splitright splitbelow title hidden
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab 
 set incsearch ignorecase smartcase hlsearch
 set wildmode=longest,list,full wildmenu
@@ -59,9 +58,6 @@ set fillchars+=vert:\
 set wrap breakindent
 set encoding=utf-8
 set textwidth=0
-set hidden
-set number
-set title
 
 """ Coloring
 
@@ -311,6 +307,9 @@ nmap <leader>f :BLines<CR>
 nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
+
+""" LazyGit mapping
+nmap <leader>gg :LazyGit<CR>
 
 """ Coc shortcuts
 nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
