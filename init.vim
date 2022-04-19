@@ -315,5 +315,7 @@ nmap <leader>gg :LazyGit<CR>
 nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
 nmap <silent> gi <Plug>(coc-implementation)
+nmap <leader>rr :RustRun<CR>
+nmap <leader>rf :RustFmt<CR>
 nnoremap <silent> go :<C-u>CocList outline<CR>
 nnoremap <silent> gO :<C-u>CocList --tab outline<CR>
