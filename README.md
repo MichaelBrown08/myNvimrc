@@ -24,3 +24,7 @@ Get init.vim and place it where it's expected:
 * mkdir -p ~/.config/nvim/
 * git clone https://github.com/MichaelBrown08/myNvimrc
 * mv myNvimrc/init.vim .config/nvim/
+
+In Neovim run:
+* :CocInstall coc-tsserver coc-json coc-rust-analyzer
+* When you first open a rust directory (create one with `cargo new <name>`) in nvim it'll ask you to accept an installation
