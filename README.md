@@ -14,6 +14,7 @@ Install latest neovim:
 * sudo add-apt-repository ppa:neovim-ppa/unstable
 * sudo apt update
 * sudo apt install neovim
+* alias vim="nvim"
  
 Install vim plug:
 * From https://github.com/junegunn/vim-plug
