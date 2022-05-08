@@ -38,6 +38,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'matze/vim-move'
 
 "" Themes
 Plug 'rhysd/vim-color-spring-night'
