@@ -149,11 +149,6 @@ endif
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
 " Sneak
 nmap <silent> <Plug>Sneak_s
 
@@ -219,8 +214,11 @@ nmap <leader>gg :LazyGit<CR>
 " Coc shortcuts
 nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+nmap <leader>ep <Plug>(coc-diagnostic-prev)
+nmap <leader>en <Plug>(coc-diagnostic-next)
 nnoremap <silent> go :<C-u>CocList outline<CR>
 nnoremap <silent> gO :<C-u>CocList --tab outline<CR>
+nnoremap <silent> ge :<C-u>CocDiagnostics<CR>
 
 """ Language-specific content
 " Rust-specific CoC shortcuts
