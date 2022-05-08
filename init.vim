@@ -1,54 +1,51 @@
 """ Vim-Plug
 call plug#begin()
 
-" Aesthetics - Main
+" Aesthetics
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bryanmylee/vim-colorscheme-icons'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'nightsense/forgotten'
-Plug 'zaki/zazen'
-
-" Aethetics - Additional
-Plug 'nightsense/nemo'
-Plug 'yuttie/hydrangea-vim'
-Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
-Plug 'rhysd/vim-color-spring-night'
+" Plug 'psliwka/vim-smoothie'
 
 " Functionalities
-Plug 'tpope/vim-fugitive'
+"" Defaults
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-sneak'
-Plug 'majutsushi/tagbar'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'Yggdroot/indentLine'
+
+"" Core functionality
 Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'sheerun/vim-polyglot'
+Plug 'wellle/context.vim'
+
+"" Git-related
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-signify'
+Plug 'kdheepak/lazygit.nvim'
+
+"" Editing
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
-Plug 'Yggdroot/indentLine'
+
+"" Movement
+Plug 'justinmk/vim-sneak'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'chrisbra/Colorizer'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'metakirby5/codi.vim'
-Plug 'dkarter/bullets.vim'
-Plug 'psliwka/vim-smoothie'
-Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'wellle/context.vim'
-Plug 'kdheepak/lazygit.nvim'
+
+"" Themes
+Plug 'rhysd/vim-color-spring-night'
 call plug#end()
 
 """ Main Configurations
 filetype plugin indent on
+syntax on
 set number splitright splitbelow title hidden
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab 
 set incsearch ignorecase smartcase hlsearch
@@ -59,37 +56,9 @@ set fillchars+=vert:\
 set wrap breakindent
 set encoding=utf-8
 set textwidth=0
-
-""" Coloring
-
-" Functions and autocmds to run whenever changing colorschemes
-function! TransparentBackground()
-    highlight Normal guibg=NONE ctermbg=NONE
-    highlight LineNr guibg=NONE ctermbg=NONE
-    set fillchars+=vert:\│
-    highlight VertSplit gui=NONE guibg=NONE guifg=#444444 cterm=NONE ctermbg=NONE ctermfg=gray
-endfunction
-
-function! DraculaPMenu()
-    highlight Pmenu guibg=#363948
-    highlight PmenuSbar guibg=#363948
-endfunction
-
-augroup MyColors
-    autocmd!
-    autocmd ColorScheme dracula call DraculaPMenu()
-    "autocmd ColorScheme * call TransparentBackground() " uncomment if you are using a translucent terminal and you want nvim to use that
-augroup END
-
-" Main Coloring Configurations
-syntax on
-color zazen
-
-" Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
-set termguicolors
+color dracula
 
 """ Plugin Configurations
-
 " NERDTree
 let NERDTreeShowHidden=1
 
@@ -97,14 +66,6 @@ let NERDTreeShowHidden=1
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_section_warning = ''
-"let g:airline#extensions#tabline#enabled = 1 " Uncomment to display buffer tabline above
-
-" Neovim :Terminal
-tmap <Esc> <C-\><C-n>
-tmap <C-w> <Esc><C-w>
-"tmap <C-d> <Esc>:q<CR>
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
@@ -112,13 +73,9 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 " indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_defaultGroup = 'NonText'
-" Disable indentLine from concealing json and markdown syntax (e.g. ```)
 let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
-
-" TagBar
-let g:tagbar_width = 30
 
 " fzf-vim
 let g:fzf_action = {
@@ -144,9 +101,9 @@ let g:fzf_colors =
 let $BAT_THEME='base16'
 
 " NERDTree on start when no file is specified
-autocmd VimEnter *
-    \   if !argc()
-    \ |   NERDTree
+autocmd VimEnter * 
+    \ if !argc() 
+    \ | NERDTree 
     \ | endif
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -196,37 +153,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
 " Sneak
 nmap <silent> <Plug>Sneak_s
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -248,21 +179,6 @@ let g:cursorhold_updatetime = 100
 " context.vim
 let g:context_nvim_no_redraw =1
 
-""" Filetype-Specific Configurations
-
-" HTML, XML, Jinja
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-" JS, JSX
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-autocmd FileType javascriptreact setlocal shiftwidth=2 tabstop=2
-
-" Markdown and Journal
-autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
 """ Custom Functions
 " Trim Whitespaces
 function! TrimWhitespace()
@@ -277,14 +193,6 @@ function! ColorDracula()
     color dracula
 endfunction
 
-" Forgotten Mode (Light)
-function! ColorForgotten()
-    " Other light airline themes: tomorrow, silver, alduin
-    let g:airline_theme='tomorrow'
-    " Other light colors: forgotten-light, nemo-light
-    color forgotten-light
-endfunction
-
 " Zazen Mode (Black & White)
 function! ColorZazen()
     let g:airline_theme='minimalist'
@@ -293,30 +201,31 @@ endfunction
 
 """ Custom Mappings
 let mapleader=","
-nmap <leader>$s <C-w>s<C-w>j:terminal<CR>:set nonumber<CR><S-a>
-nmap <leader>$v <C-w>v<C-w>l:terminal<CR>:set nonumber<CR><S-a>
-nmap <leader>q :NERDTreeToggle<CR>
-nmap <leader>ee :Colors<CR>
-nmap <leader>ea :AirlineTheme 
-nmap <leader>e1 :call ColorDracula()<CR>
-nmap <leader>e2 :call ColorForgotten()<CR>
-nmap <leader>e3 :call ColorZazen()<CR>
 nmap <leader>t :call TrimWhitespace()<CR>
-nmap <leader>s :Rg<CR>
+nmap <leader>q :NERDTreeToggle<CR>
 nmap <leader>d :Files<CR>
 nmap <leader>f :BLines<CR>
-nmap <silent> <leader><leader> :noh<CR>
+nmap <leader>ee :Colors<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
-""" LazyGit mapping
+" Remove highlighted searches quickly
+nmap <silent> <leader><leader> :noh<CR>
+
+" LazyGit mapping
 nmap <leader>gg :LazyGit<CR>
 
-""" Coc shortcuts
+" Coc shortcuts
 nmap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <leader>rr :RustRun<CR>
-nmap <leader>rf :RustFmt<CR>
 nnoremap <silent> go :<C-u>CocList outline<CR>
 nnoremap <silent> gO :<C-u>CocList --tab outline<CR>
+
+""" Language-specific content
+" Rust-specific CoC shortcuts
+nmap <leader>rr :RustRun<CR>
+nmap <leader>rf :RustFmt<CR>
+
+" JS, JSX
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascriptreact setlocal shiftwidth=2 tabstop=2
