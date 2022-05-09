@@ -7,6 +7,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bryanmylee/vim-colorscheme-icons'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'vimoxide/vim-cinnabar'
 " Plug 'psliwka/vim-smoothie'
 
 " Functionalities
