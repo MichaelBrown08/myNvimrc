@@ -6,9 +6,10 @@ Node
 * sudo apt install nodejs
 * node --version
 
-Rust (WSL specific, see: https://www.rust-lang.org/tools/install).
+Rust (WSL specific see: https://www.rust-lang.org/tools/install).
 Default installation is fine. CoC will install dependencies for rust-analyzer.
-* curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+* (WSL) curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+* (Ubuntu) curl https://sh.rustup.rs -sSf | sh
 
 Install latest neovim:
 * sudo add-apt-repository ppa:neovim-ppa/unstable
